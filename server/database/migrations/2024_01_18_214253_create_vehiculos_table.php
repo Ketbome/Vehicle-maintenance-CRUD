@@ -20,6 +20,7 @@ class CreateVehiculosTable extends Migration
             $table->year('anio');
             $table->unsignedBigInteger('id_usuario');
             $table->decimal('precio', 15, 2);
+            $table->foreign('id_usuario')->references('id')->on('usuarios')->onDelete('cascade');
             $table->timestamps();
         });
     }

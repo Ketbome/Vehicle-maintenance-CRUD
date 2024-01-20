@@ -15,15 +15,16 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
-    $validatedData = $request->validate([
-        'nombre' => 'required|max:255',
-        'apellido' => 'required|max:255',
-        'email' => 'required|email|unique:usuarios',
-    ]);
+        $validatedData = $request->validate([
+            'nombre' => 'required|max:255',
+            'apellidos' => 'required|max:255',
+            'email' => 'required|email|unique:usuarios',
+        ]);
 
-    $recurso = Usuario::create($validatedData);
-    return response()->json($recurso, 201);
+        $recurso = Usuario::create($validatedData);
+        return response()->json($recurso, 201);
     }
+
 
     public function show($id)
     {
@@ -33,8 +34,14 @@ class UsuarioController extends Controller
 
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'nombre' => 'sometimes|required|max:255',
+            'apellidos' => 'sometimes|required|max:255',
+            'email' => 'sometimes|required|email|unique:usuarios',
+        ]);
+
         $usuario = Usuario::findOrFail($id);
-        $usuario->update($request->all());
+        $usuario->update($validatedData);
         return response()->json($usuario);
     }
 

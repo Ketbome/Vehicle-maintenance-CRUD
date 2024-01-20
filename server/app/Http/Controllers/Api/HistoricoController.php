@@ -4,61 +4,45 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Historico;
 
 class HistoricoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return Historico::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'id_vehiculo' => 'required|integer',
+            'id_usuario' => 'required|integer',
+            'fecha_cambio' => 'required|date'
+        ]);
+
+        $recurso = Historico::create($validatedData);
+        return response()->json($recurso, 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $historico = Historico::findOrFail($id);
+        return response()->json($historico);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    // Al ser un historico no se puede modificar, por el hecho de que es un registro de un cambio
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        Historico::destroy($id);
+        return response()->json(null, 204);
     }
+
+    public function historicosPorVehiculo($idVehiculo)
+    {
+        $historicos = Historico::where('id_vehiculo', $idVehiculo)->get();
+        return response()->json($historicos);
+    }
+
 }

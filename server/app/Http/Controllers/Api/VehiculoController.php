@@ -51,4 +51,11 @@ class VehiculoController extends Controller
         Vehiculo::destroy($id);
         return response()->json(null, 204);
     }
+
+    public function vehiculosPorUsuario($idUsuario)
+    {
+        $vehiculos = Vehiculo::where('id_usuario', $idUsuario)->get();
+        return response()->json($vehiculos);
+    }
+
 }

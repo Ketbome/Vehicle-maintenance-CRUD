@@ -20,3 +20,7 @@ use App\Http\Controllers\Api\HistoricoController;
 Route::apiResource('usuarios', UsuarioController::class);
 Route::apiResource('vehiculos', VehiculoController::class);
 Route::apiResource('historicos', HistoricoController::class);
+
+
+Route::get('/findHistoricalVehicle/{idVehiculo}', [HistoricoController::class, 'historicosPorVehiculo']);
+Route::get('/findVehiclesUser/{idUsuario}', [VehiculoController::class, 'vehiculosPorUsuario']);

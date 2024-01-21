@@ -38,3 +38,15 @@ export const fetchVehiculos = async (
   }
   return await response.json();
 };
+
+export const fetchHistorialVehiculo = async (
+  id: number
+): Promise<Vehiculo[]> => {
+  const response = await fetch(
+    `http://127.0.0.1:8000/api/findHistoricalVehicle/${id}`
+  );
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return await response.json();
+};

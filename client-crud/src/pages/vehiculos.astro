@@ -15,11 +15,13 @@ const vehiculos: Vehiculo[] = await fetchVehiculos(0, 1000);
         {vehiculos.map((vehiculo) => (
             <CardCar
                 key={vehiculo.id}
+                id={vehiculo.id}
                 marca={vehiculo.marca}
                 modelo={vehiculo.modelo}
                 anio={vehiculo.anio}
                 precio={vehiculo.precio}
                 user={usuarios.find((usuario) => usuario.id === vehiculo.id_usuario)}
+                usuarios={usuarios}
             />
           ))}
         <!-- <Pagination /> -->

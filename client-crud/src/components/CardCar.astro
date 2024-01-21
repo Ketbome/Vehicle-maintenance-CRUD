@@ -1,29 +1,53 @@
 ---
 import type { Usuario } from "../types";
+import ButtonDelete from "./ButtonDelete.astro";
+import ButtonDuenio from "./ButtonDuenio.astro";
+import ButtonUpdate from "./ButtonUpdate.astro";
 interface UserCardProps {
+  id: number;
   marca: string;
   modelo: string;
   anio: number;
   precio: number;
   user: Usuario;
+  usuarios: Usuario[];
 }
 
 // Obtener las props con tipos
-const { marca, modelo, anio, precio, user } = Astro.props as UserCardProps;
+const { id, marca, modelo, anio, precio, user, usuarios } = Astro.props as UserCardProps;
 
 // Formatear precio a CLP
-const precioCLP = precio.toLocaleString('es-CL', {
+const precioCLP = Number(precio).toLocaleString('es-CL', {
   style: 'currency',
   currency: 'CLP',
-  maximumFractionDigits: 0  // Para asegurar que sea un número entero
+  currencyDisplay: 'symbol',
+  maximumFractionDigits: 0
 });
+
+
 ---
 
-<div class="flex flex-col bg-gray-700 hover:bg-gray-600 transition-colors duration-300 p-2 rounded-lg shadow-lg w-3/4 :w-1/2 items-center pt-4">
-  <img src={`/public/${marca}.svg`} alt={marca} class="w-20 invert" />
-  <div class="flex flex-row items-center gap-3 px-10 text-2xl py-4">
+<article class="flex flex-col bg-gray-700 hover:bg-gray-600 transition-colors duration-300 p-2 rounded-lg shadow-lg w-3/4 :w-1/2 items-center pt-4">
+  <img src={`/assets/${marca}.svg`} alt={marca} class="w-20 invert" />
+  <div class="flex flex-col items-center gap-3 px-10 text-2xl py-4">
     <p>{marca} - {modelo} - {anio}</p>
+    <p class="text-green-400">{precioCLP}</p>
   </div>
   <p class="text-gray-300 text-center">Dueño: <strong>{user.nombre} {user.apellidos}</p>
-  <p class="text-gray-300 text-center mb-4">Contacto <strong>{user.email}</strong></p>
-</div>
+  <p class="text-gray-300 text-center mb-4">Contacto: <strong>{user.email}</strong></p>
+  <div class="flex justify-between gap-4">
+    <ButtonDuenio id={id} usuarios={usuarios}>
+      <img slot="before" src="/assets/icons/change.svg" alt="Cambiar" class="invert"/>
+      Cambiar Dueño
+    </ButtonDuenio>
+    <ButtonUpdate id={id} precio={precio}>
+      <img slot="before" src="/assets/icons/changeData.svg" alt="Update" class="invert"/>
+      Cambiar Precio
+    </ButtonUpdate>
+    <ButtonDelete id={id} >
+      <img slot="before" src="/assets/icons/delete.svg" alt="Eliminar" class="invert"/>
+      Eliminar
+    </ButtonDelete>
+  </div>
+  
+</article>

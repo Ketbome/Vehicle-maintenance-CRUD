@@ -1,8 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import CardUser from '../components/CardUser.astro';
+import type { Usuario } from '../types';
+
+// Función asíncrona para cargar los datos de los usuarios
+const fetchUsers = async (): Promise<Usuario[]> => {
+  const response = await fetch('http://127.0.0.1:8000/api/usuarios');
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return await response.json();
+};
+
+const usuarios = await fetchUsers();
 ---
 
 
 <Layout title="Usuarios">
-	
+    <section class="flex flex-col items-center justify-center w-full h-full gap-3">
+        <h1 class="text-4xl font-bold text-white">Usuarios</h1>
+        {usuarios.map((user) => (
+            <CardUser 
+              key={user.id}
+              userName={user.nombre}
+              lastName={user.apellidos} // Asumiendo que esta info viene del usuario
+              userCars={[]} // Inicialmente vacío, se cargará con lazy loading
+            />
+          ))}
+    </section>
 </Layout>

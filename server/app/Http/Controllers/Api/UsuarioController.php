@@ -8,10 +8,14 @@ use App\Models\Usuario;
 
 class UsuarioController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Usuario::all();
+        $start = $request->query('start', 0); // Comenzar en el registro 20 por defecto
+        $limit = $request->query('limit', 200); // Límite de 10 registros por defecto
+
+        return Usuario::skip($start)->take($limit)->get();
     }
+
 
     public function store(Request $request)
     {

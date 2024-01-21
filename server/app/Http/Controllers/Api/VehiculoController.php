@@ -8,9 +8,12 @@ use App\Models\Vehiculo;
 
 class VehiculoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Vehiculo::all();
+        $start = $request->query('start', 0); // Comenzar en el registro 20 por defecto
+        $limit = $request->query('limit', 200); // Límite de 10 registros por defecto
+
+        return Vehiculo::skip($start)->take($limit)->get();
     }
 
     public function store(Request $request)

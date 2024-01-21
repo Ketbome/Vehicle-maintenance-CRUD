@@ -1,8 +1,8 @@
 ---
 import { fetchUsers, fetchVehiculos } from '../utils/fetch';
 import Layout from '../layouts/Layout.astro';
-import CardCar from '../components/CardCar.astro';
 import type { Usuario, Vehiculo } from '../types';
+import SearchVehicles from '../components/SearchVehicles.jsx';
 
 const usuarios: Usuario[] = await fetchUsers(0, 1000);
 const vehiculos: Vehiculo[] = await fetchVehiculos(0, 1000);
@@ -10,20 +10,8 @@ const vehiculos: Vehiculo[] = await fetchVehiculos(0, 1000);
 
 
 <Layout title="Vehiculos">
-    <section class="flex flex-col items-center justify-center w-full h-full gap-3 py-10">
+    <section class="flex flex-col items-center justify-center w-full h-full gap-3 py-10" data-vehiculos={vehiculos}>
         <h1 class="text-2xl font-bold text-white lg:text-4xl pb-4">Vehiculos</h1>
-        {vehiculos.map((vehiculo) => (
-            <CardCar
-                key={vehiculo.id}
-                id={vehiculo.id}
-                marca={vehiculo.marca}
-                modelo={vehiculo.modelo}
-                anio={vehiculo.anio}
-                precio={vehiculo.precio}
-                user={usuarios.find((usuario) => usuario.id === vehiculo.id_usuario)}
-                usuarios={usuarios}
-            />
-          ))}
-        <!-- <Pagination /> -->
+        <SearchVehicles client:load vehiculos={vehiculos} usuarios={usuarios} />
     </section>
-</Layout>
+</Layout>../components/CardCar.tsx/index.js

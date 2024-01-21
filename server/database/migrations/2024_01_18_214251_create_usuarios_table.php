@@ -18,7 +18,7 @@ class CreateUsuariosTable extends Migration
             $table -> string('nombre');
             $table -> string('apellidos');
             $table -> string('email')->unique();
-            // $table->timestamps();
+            $table->timestamps();
         });
 
         Schema::table('usuarios', function (Blueprint $table) {

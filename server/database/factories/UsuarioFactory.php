@@ -3,14 +3,11 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Usuario;
+use App\Models\Vehiculo;
 
 class UsuarioFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
     public function definition()
     {
         return [
@@ -18,5 +15,14 @@ class UsuarioFactory extends Factory
             'apellidos'=> $this->faker->lastName,
             'email'=> $this->faker->unique()->safeEmail, 
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterMaking(function (Usuario $usuario) {
+            //
+        })->afterCreating(function (Usuario $usuario) {
+            $usuario->vehiculos()->save(Vehiculo::factory()->make());
+        });
     }
 }

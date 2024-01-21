@@ -21,7 +21,7 @@ class CreateVehiculosTable extends Migration
             $table->unsignedBigInteger('id_usuario');
             $table->decimal('precio', 15, 2);
             $table->foreign('id_usuario')->references('id')->on('usuarios')->onDelete('cascade');
-            // $table->timestamps();
+            $table->timestamps();
         });
 
         Schema::table('vehiculos', function (Blueprint $table) {

@@ -9,6 +9,6 @@ class HistoricosTableSeeder extends Seeder
 {
     public function run()
     {
-        Historico::factory()->count(100)->create();
+        Historico::factory()->count(200)->create();
     }
 }

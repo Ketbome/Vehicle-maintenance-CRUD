@@ -9,6 +9,6 @@ class UsuariosTableSeeder extends Seeder
 {
     public function run()
     {
-        Usuario::factory()->count(15)->create();
+        Usuario::factory()->count(20)->create();
     }
 }

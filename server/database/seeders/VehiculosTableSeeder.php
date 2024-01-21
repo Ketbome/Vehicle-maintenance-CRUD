@@ -10,7 +10,7 @@ class VehiculosTableSeeder extends Seeder
 {
     public function run()
     {
-        Vehiculo::factory()->count(40)->create()->each(function ($vehiculo) {
+        Vehiculo::factory()->count(30)->create()->each(function ($vehiculo) {
             Historico::factory()->create([
                 'id_usuario' => $vehiculo->id_usuario,
                 'id_vehiculo' => $vehiculo->id,

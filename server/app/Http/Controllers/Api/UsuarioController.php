@@ -54,4 +54,10 @@ class UsuarioController extends Controller
         Usuario::findOrFail($id)->delete();
         return response()->json(null, 204);
     }
+
+    public function count()
+    {
+        $userCount = Usuario::count();
+        return response()->json(['totalUsuarios' => $userCount]);
+    }
 }

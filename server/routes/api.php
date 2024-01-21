@@ -24,3 +24,5 @@ Route::apiResource('historicos', HistoricoController::class);
 
 Route::get('/findHistoricalVehicle/{idVehiculo}', [HistoricoController::class, 'historicosPorVehiculo']);
 Route::get('/findVehiclesUser/{idUsuario}', [VehiculoController::class, 'vehiculosPorUsuario']);
+Route::get('/countUsuarios', [UsuarioController::class, 'count']);
+

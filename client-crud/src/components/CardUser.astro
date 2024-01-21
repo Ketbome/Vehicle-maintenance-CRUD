@@ -17,9 +17,9 @@ const { userName, lastName, userCars } = Astro.props as UserCardProps;
   
     <div class="autos bg-gray-800 p-3 rounded-md">
       <h4 class="text-white text-lg mb-2">Autos de {userName}:</h4>
-      <ul class="list-disc list-inside text-gray-300">
+      <ul class=" list-inside text-gray-300">
         {userCars.map((car) => (
-          <li>{car.marca} - {car.modelo} - {car.anio}</li>
+          <li class="flex flex-row items-center gap-3"><img src={`/public/${car.marca}.svg`} alt={car.marca} class="w-10" /> {car.marca} - {car.modelo} - {car.anio}</li>
         ))}
       </ul>
     </div>

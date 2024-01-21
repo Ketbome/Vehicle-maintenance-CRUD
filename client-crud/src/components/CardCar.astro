@@ -1,0 +1,29 @@
+---
+import type { Usuario } from "../types";
+interface UserCardProps {
+  marca: string;
+  modelo: string;
+  anio: number;
+  precio: number;
+  user: Usuario;
+}
+
+// Obtener las props con tipos
+const { marca, modelo, anio, precio, user } = Astro.props as UserCardProps;
+
+// Formatear precio a CLP
+const precioCLP = precio.toLocaleString('es-CL', {
+  style: 'currency',
+  currency: 'CLP',
+  maximumFractionDigits: 0  // Para asegurar que sea un número entero
+});
+---
+
+<div class="flex flex-col bg-gray-700 hover:bg-gray-600 transition-colors duration-300 p-2 rounded-lg shadow-lg w-3/4 :w-1/2 items-center pt-4">
+  <img src={`/public/${marca}.svg`} alt={marca} class="w-20 invert" />
+  <div class="flex flex-row items-center gap-3 px-10 text-2xl py-4">
+    <p>{marca} - {modelo} - {anio}</p>
+  </div>
+  <p class="text-gray-300 text-center">Dueño: <strong>{user.nombre} {user.apellidos}</p>
+  <p class="text-gray-300 text-center mb-4">Contacto <strong>{user.email}</strong></p>
+</div>

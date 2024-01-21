@@ -1,18 +1,37 @@
 ---
+import { fetchUsers, fetchVehiculos } from '../utils/fetch';
 import Layout from '../layouts/Layout.astro';
 import CardUser from '../components/CardUser.astro';
-import type { Usuario } from '../types';
+import Pagination from '../components/Pagination.astro';
+import type { Usuario, Vehiculo } from '../types';
 
-// Función asíncrona para cargar los datos de los usuarios
-const fetchUsers = async (): Promise<Usuario[]> => {
-  const response = await fetch('http://127.0.0.1:8000/api/usuarios');
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
+// Suponiendo que tienes un estado para la página actual
+/* let currentPage: number = 1;
+const numUsuarios = await fetchNumUsers();
+const limit = 5;
+const numPaginas = Math.ceil(numUsuarios / limit);
+
+export async function getStaticPaths(numPaginas: number) {
+  let paths = [];
+  for (let i = 1; i <= numPaginas; i++) {
+    paths.push({ params: { pagina: i } });
   }
-  return await response.json();
-};
 
-const usuarios = await fetchUsers();
+  return paths;
+}
+
+export async function getStaticProps({ params }) {
+  currentPage = params.pagina;
+  return {
+    props: {
+      currentPage,
+      numPaginas,
+    },
+  };
+} */
+
+const usuarios: Usuario[] = await fetchUsers(0, 1000);
+const vehiculos: Vehiculo[] = await fetchVehiculos(0, 1000);
 ---
 
 
@@ -23,9 +42,10 @@ const usuarios = await fetchUsers();
             <CardUser 
               key={user.id}
               userName={user.nombre}
-              lastName={user.apellidos} // Asumiendo que esta info viene del usuario
-              userCars={[]} // Inicialmente vacío, se cargará con lazy loading
+              lastName={user.apellidos} 
+              userCars={vehiculos.filter((car) => car.id_usuario === user.id)} 
             />
           ))}
+        <!-- <Pagination /> -->
     </section>
 </Layout>

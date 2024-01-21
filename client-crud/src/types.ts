@@ -14,3 +14,10 @@ export interface Vehiculo {
   id_usuario: number;
   precio: number;
 }
+
+export interface Historial {
+  id: number;
+  id_usuario: number;
+  id_vehiculo: number;
+  fecha_cambio: string;
+}

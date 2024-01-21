@@ -1,4 +1,4 @@
-import type { Usuario, Vehiculo } from "../types";
+import type { Usuario, Vehiculo, Historial } from "../types";
 
 // Función asíncrona para cargar los datos de los usuarios
 export const fetchUsers = async (
@@ -41,7 +41,7 @@ export const fetchVehiculos = async (
 
 export const fetchHistorialVehiculo = async (
   id: number
-): Promise<Vehiculo[]> => {
+): Promise<Historial[]> => {
   const response = await fetch(
     `http://127.0.0.1:8000/api/findHistoricalVehicle/${id}`
   );

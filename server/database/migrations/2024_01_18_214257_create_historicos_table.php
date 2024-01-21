@@ -20,15 +20,14 @@ class CreateHistoricosTable extends Migration
             $table->timestamp('fecha_cambio')->useCurrent();
             $table->foreign('id_vehiculo')->references('id')->on('vehiculos')->onDelete('cascade');
             $table->foreign('id_usuario')->references('id')->on('usuarios')->onDelete('cascade');
-            $table->timestamps();
+            // $table->timestamps();
+        });
+
+        Schema::table('historicos', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('historicos');

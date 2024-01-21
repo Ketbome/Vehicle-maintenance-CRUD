@@ -47,7 +47,7 @@ class UsuarioController extends Controller
 
     public function destroy($id)
     {
-        Usuario::destroy($id);
+        Usuario::findOrFail($id)->delete();
         return response()->json(null, 204);
     }
 }

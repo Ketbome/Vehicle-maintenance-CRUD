@@ -18,15 +18,14 @@ class CreateUsuariosTable extends Migration
             $table -> string('nombre');
             $table -> string('apellidos');
             $table -> string('email')->unique();
-            $table->timestamps();
+            // $table->timestamps();
+        });
+
+        Schema::table('usuarios', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::dropIfExists('usuarios');

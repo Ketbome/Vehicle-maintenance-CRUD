@@ -70,3 +70,34 @@ export const fetchHistorialVehiculo = async (
     return []; // Retorna un arreglo vacío en caso de error
   }
 };
+
+export const addVehiculo = async (
+  marca: string,
+  modelo: string,
+  anio: number,
+  precio: number,
+  id_usuario: number
+): Promise<Vehiculo> => {
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/api/vehiculos`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        marca: marca,
+        modelo: modelo,
+        anio: anio,
+        precio: precio,
+        id_usuario: id_usuario,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    alert("Vehiculo agregado correctamente");
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};

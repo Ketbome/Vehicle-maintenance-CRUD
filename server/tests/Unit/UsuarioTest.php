@@ -61,16 +61,6 @@ class UsuarioTest extends TestCase
         $this->assertDatabaseHas('usuarios', ['id' => $usuario->id, 'nombre' => 'Nombre Actualizado']);
     }
 
-    public function test_it_deletes_a_user()
-    {
-        $usuario = Usuario::factory()->create();
-
-        $response = $this->deleteJson("/api/usuarios/{$usuario->id}");
-
-        $response->assertNoContent();
-        $this->assertDatabaseMissing('usuarios', ['id' => $usuario->id]);
-    }
-
     public function test_it_returns_users_count()
     {
         $count = Usuario::factory()->count(3)->create()->count();

@@ -13,7 +13,7 @@ class VehiculoFactory extends Factory
             'marca' => $this->faker->randomElement(['Toyota', 'Ford', 'Chevrolet', 'Nissan', 'Hyundai', 'Tesla', 'Volkswagen', 'Mercedes-Benz', 'BMW', 'Honda']),
             'modelo' => $this->faker->bothify('##????'), 
             'anio' => $this->faker->numberBetween($min = 1990, $max = 2021),
-            'id_usuario' => Usuario::inRandomOrder()->first()->id ?? null,
+            'id_usuario' => Usuario::inRandomOrder()->first()->id,
             'precio' => $this->faker->numberBetween(5000000, 30000000)
         ];
     }

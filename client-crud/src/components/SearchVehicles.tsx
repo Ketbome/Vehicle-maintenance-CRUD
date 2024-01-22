@@ -53,18 +53,19 @@ function SearchVehicles({
             </svg>
           </span>
         </div>
-        {vehiculosFiltrados.map((vehiculo) => (
-          <CardCar
-            key={vehiculo.id}
-            id={vehiculo.id}
-            marca={vehiculo.marca}
-            modelo={vehiculo.modelo}
-            anio={vehiculo.anio}
-            precio={vehiculo.precio}
-            user={usuarios.find((user) => user.id === vehiculo.id_usuario)}
-            usuarios={usuarios}
-          />
-        ))}
+        {vehiculos &&
+          vehiculosFiltrados.map((vehiculo) => (
+            <CardCar
+              key={vehiculo.id}
+              id={vehiculo.id}
+              marca={vehiculo.marca}
+              modelo={vehiculo.modelo}
+              anio={vehiculo.anio}
+              precio={vehiculo.precio}
+              user={usuarios.find((user) => user.id === vehiculo.id_usuario)}
+              usuarios={usuarios}
+            />
+          ))}
       </article>
     </section>
   );

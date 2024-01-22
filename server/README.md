@@ -1,5 +1,11 @@
 ## Inicializacion
 
+En primera instancia la instalacion de las dependencias
+
+```bash
+composer
+```
+
 ### Configurar las Variables de Entorno
 
 En el archivo `.env`, configura las variables de entorno para la conexión a la base de datos. Deberás proporcionar el nombre de la base de datos, el usuario y la contraseña que correspondan a tu configuración de MySQL:
@@ -40,4 +46,10 @@ Una vez que las tablas están en su lugar, puedes utilizar los seeders para llen
 
 ```bash
 php artisan db:seed
+```
+
+### Por ultimo correr el servidor
+
+```bash
+php artisan serve
 ```
